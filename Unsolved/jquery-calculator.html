@@ -35,21 +35,21 @@
             <button id="button-1" class="btn btn-primary number" value="1"><span>1</span></button>
             <button id="button-2" class="btn btn-primary number" value="2"><span>2</span></button>
             <button id="button-3" class="btn btn-primary number" value="3"><span>3</span></button>
-            <button id="button-plus" class="btn btn-danger operator" value="plus"><span>+</span></button>
+            <button id="button-plus" class="btn btn-danger operator" value="+"><span>+</span></button>
             <br><br>
             <button id="button-4" class="btn btn-primary number" value="4"><span>4</span></button>
             <button id="button-5" class="btn btn-primary number" value="5"><span>5</span></button>
             <button id="button-6" class="btn btn-primary number" value="6"><span>6</span></button>
-            <button id="button-minus" class="btn btn-danger operator" value="minus"><span>&minus;</span></button>
+            <button id="button-minus" class="btn btn-danger operator" value="-"><span>&minus;</span></button>
             <br><br>
             <button id="button-7" class="btn btn-primary number" value="7"><span>7</span></button>
             <button id="button-8" class="btn btn-primary number" value="8"><span>8</span></button>
             <button id="button-9" class="btn btn-primary number" value="9"><span>9</span></button>
-            <button id="button-multiply" class="btn btn-danger operator" value="times"><span>&times;</span></button>
+            <button id="button-multiply" class="btn btn-danger operator" value="*"><span>&times;</span></button>
             <br><br>
             <button id="button-0" class="btn btn-primary number" value="0"><span>0</span></button>
-            <button id="button-divide" class="btn btn-danger operator" value="divide"><span>&divide;</span></button>
-            <button id="button-power" class="btn btn-danger operator" value="power"><span>^</span></button>
+            <button id="button-divide" class="btn btn-danger operator" value="/"><span>&divide;</span></button>
+            <button id="button-power" class="btn btn-danger operator" value="^"><span>^</span></button>
             <button id="button-equal" class="btn btn-success equal" value="equals"><span>=</span></button>
             <br><br>
             <button id="button-clear" class="btn btn-dark clear" value="clear"><span>clear</span></button>
@@ -77,34 +77,80 @@
 
 $(document).ready(function() {
 
-  // Your code here...
-  var numberString = "";
-  //listen for number(s) to be pressed
-  //numbers have a class of number
-  $(".number").on("click", function(){
+// Your code here...
+var numberString1 = "";
+var numberString2 = "";
+var operator = "";
+//numbers have a class of number
+//display/store/append numbers 
+//display/store/append operator to be used
+//display/store/append numbers to be used
+$(".number").on("click", function(){
+  if (operator.length != 0) {
+    //listen for other number(s) to be pressed
+    var number = $(this).val();
+    numberString2 = numberString2 + number;
+    $("#second-number").text(numberString2)
+  } else {
+    //listen for number(s) to be pressed
     var number = $(this).val();
     console.log("console log of number pushed", number);
-    numberString= numberString + number;
-    console.log("this is the array", numberString);
-  })
-  //display/store/append numbers as theyre pressed
-  $(".operator").on("click", function(){
-    
-  })
-  //listen for operator to be pressed
+    numberString1 = numberString1 + number;
+    console.log("this is the array", numberString1); 
+    $('#first-number').text(numberString1)
+  }
+})
 
-  //display/store/append operator to be used
 
-  //listen for other number(s) to be pressed
+//listen for operator to be pressed
+$(".operator").on("click", function(){
+  if (numberString1.length != 0) {
+    operator = $(this).val();
+    $('#operator').text(operator);
+  }
+})
 
-  //display/store/append numbers to be used
+//listen for equal sign
 
-  //listen for equal sign
+//do logic 
 
-  //do logic 
+$(".equal").on('click', function(){
+  var result
+  var n1 = parseInt(numberString1)
+  var n2 = parseInt(numberString2)
+  switch (operator) {
+    case '+':
+      result = n1 + n2
+      break
+    case '-':
+      result = n1 - n2
+      break
+    case '*':
+    result = n1 * n2
+      break
+    case '/':
+      result = n1 / n2
+      break
+    case '^':
+      result = Math.pow(n1, n2)
+      break
+  }
+  $('#result').text(result)
+})
 
-  //display results
 
+//display results
+
+// clear
+$('.clear').on('click', function(){
+  $('#result').text('')
+  $('#operator').text('')
+  $('#first-number').text('')
+  $("#second-number").text('')
+  numberString1 = ''
+  numberString2 = ''
+  operator = ''
+})
 
 });
 
