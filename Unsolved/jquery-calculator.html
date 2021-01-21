@@ -78,7 +78,33 @@
 $(document).ready(function() {
 
 // Your code here...
+var numberString = "";
+//listen for number(s) to be pressed
+//numbers have a class of number
+$(".number").on("click", function(){
+    var number = $(this).val();
+    console.log("console log of number pushed", number);
+    numberString= numberString + number;
+    console.log("this is the array", numberString);
+})
+//listen for operator to be pressed
+$(".operator").on("click", function(){
+  
+})
 
+//display/store/append numbers 
+
+//display/store/append operator to be used
+
+//listen for other number(s) to be pressed
+
+//display/store/append numbers to be used
+
+//listen for equal sign
+
+//do logic 
+
+//display results
 
 });
 
